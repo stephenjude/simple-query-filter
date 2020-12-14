@@ -1,0 +1,67 @@
+{
+    "name": "stephenjude/simple-query-filter",
+    "description": "Easily filter eloquent model queries from HTTP requests",
+    "keywords": [
+        "stephenjude",
+        "simple-query-filter"
+    ],
+    "homepage": "https://github.com/stephenjude/simple-query-filter",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stephen Jude",
+            "email": "hello@stephenjude.me",
+            "homepage": "https://spatie.be",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.4|^8.0",
+        "illuminate/contracts": "^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^6.0",
+        "phpunit/phpunit": "^9.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stephenjude\\SimpleQueryFilter\\": "src",
+            "Stephenjude\\SimpleQueryFilter\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Stephenjude\\SimpleQueryFilter\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "psalm": "vendor/bin/psalm",
+        "test": "vendor/bin/phpunit --colors=always",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Stephenjude\\SimpleQueryFilter\\SimpleQueryFilterServiceProvider"
+            ],
+            "aliases": {
+                "SimpleQueryFilter": "Stephenjude\\SimpleQueryFilter\\SimpleQueryFilterFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "funding": [
+        {
+            "type": "github",
+            "url": "https://github.com/sponsors/spatie"
+        },
+        {
+            "type": "other",
+            "url": "https://spatie.be/open-source/support-us"
+        }
+    ]
+}
