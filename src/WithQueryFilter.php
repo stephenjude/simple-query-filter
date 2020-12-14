@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Traits;
+namespace Stephenjude\SimpleQueryFilter;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\LazyCollection;
 use Symfony\Component\HttpFoundation\Response;
@@ -37,7 +38,7 @@ trait WithQueryFilter
          * Prepare search query strings.
          */
         $search = $search->map(function ($value, $key) {
-            return [$key, 'LIKE', '%' . $value . '%'];
+            return [$key, 'LIKE', '%'.$value.'%'];
         })->values()->all();
 
         /**
@@ -46,13 +47,15 @@ trait WithQueryFilter
         return $query->where($search);
     }
 
-    
+    /**
+     * @param Collection|LazyCollection $search
+     */
     private function abortIfColumnNotFound($search)
     {
         abort_unless(
             Schema::hasColumns($this->getTable(), $search->keys()->all()),
             Response::HTTP_BAD_REQUEST,
-            'Column not found on ' . $this->getTable() . ' table'
+            'Column not found on '.$this->getTable().' table'
         );
     }
 }
