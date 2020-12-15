@@ -1,8 +1,9 @@
 # Simple Query Filter
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/stephenjude/simple-query-filter.svg?style=flat-square)](https://packagist.org/packages/stephenjude/simple-query-filter)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/stephenjude/simple-query-filter/run-tests?label=tests)](https://github.com/stephenjude/simple-query-filter/actions?query=workflow%3ATests+branch%3Amaster)
+[![Build Status](https://img.shields.io/travis/stephenjude/simple-query-filter/master.svg?style=flat-square)](https://travis-ci.org/stephenjude/simple-query-filter)
 [![Total Downloads](https://img.shields.io/packagist/dt/stephenjude/simple-query-filter.svg?style=flat-square)](https://packagist.org/packages/stephenjude/simple-query-filter)
+
 
 This package allows you to filter eloquent model queries based on HTTP request.
 
