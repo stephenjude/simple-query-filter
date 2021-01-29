@@ -39,7 +39,7 @@ class PostController extends Controller
 }
 ```
 ### Search a model based on a request: /posts?column_name=search_string:
-The `scout()` method is usedto perform a full search on the model. The result for this method includes any row that meets the search criteria.
+The `scout()` method is used to perform a full search on the model. The result for this method includes any row that meets the search criteria.
 ```php
 
 class PostController extends Controller
