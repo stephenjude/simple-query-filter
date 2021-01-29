@@ -61,6 +61,7 @@ You can alternatively pass an array of column names and search strings as a key-
     ];
 
     $posts = Post::filter($queryParam)->latest()->paginate();
+    $posts = Post::scout($queryParam)->latest()->paginate();
 ```
 ## Column Not Found Exception
 The eloquent filter scope provided in this package will throw a bad request HTTP exception if it fails to find any of the specified column names. 
