@@ -10,10 +10,36 @@ use Symfony\Component\HttpFoundation\Response;
 trait WithQueryFilter
 {
     /**
-     * @param array $search
+     * @param array $filter
      * @param mixed $query
      */
-    public function scopeFilter($query, $search)
+    public function scopeFilter($query, $filter)
+    {
+        /**
+         * Make lazy collection of filter queries except the "page" key.
+         * The "page" key is used for eloquent pagination request. This will
+         * prevent us from throwing column not found exception for the "page" key.
+         */
+        $filter = collect($filter)->lazy()->except('page');
+
+        /**
+         * Abort if any of the column is not found on the database tables.
+         */
+        $this->abortIfColumnNotFound($filter);
+
+        /**
+         * Prepare filter query strings.
+         */
+        $filter->map(function ($value, $key) use ($query) {
+            return $query->where($key, 'LIKE', '%'.$value.'%');
+        })->values()->all();
+    }
+
+    /**
+     * @param array $filter
+     * @param mixed $query
+     */
+    public function scopeScout($query, $search)
     {
         /**
          * Make lazy collection of search queries except the "page" key.
@@ -23,13 +49,6 @@ trait WithQueryFilter
         $search = collect($search)->lazy()->except('page');
 
         /**
-         * Return query if there is no search query.
-         */
-        if ($search->isEmpty()) {
-            return $query;
-        }
-
-        /**
          * Abort if any of the column is not found on the database tables.
          */
         $this->abortIfColumnNotFound($search);
@@ -37,14 +56,9 @@ trait WithQueryFilter
         /**
          * Prepare search query strings.
          */
-        $search = $search->map(function ($value, $key) {
-            return [$key, 'LIKE', '%'.$value.'%'];
-        })->values()->all();
-
-        /**
-         * Apply query strings.
-         */
-        return $query->where($search);
+        $search->map(function ($value, $key) use ($query) {
+            $query->orWhere($key, 'LIKE', '%'.$value.'%');
+        });
     }
 
     /**
