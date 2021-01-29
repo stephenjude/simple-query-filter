@@ -25,7 +25,8 @@ class Post extends Model
     use WithQueryFilter;
 }
 ```
-### Filter a query based on a request: /posts?column_name=search_string:
+### Filter a model based on a request: /posts?column_name=search_string:
+The `filter()` method is used to filter the rows in a table. The result will only include rows that meets all the criteria of the query parameters. 
 ```php
 
 class PostController extends Controller
@@ -37,6 +38,20 @@ class PostController extends Controller
     }
 }
 ```
+### Search a model based on a request: /posts?column_name=search_string:
+The `scout()` method is usedto perform a full search on the model. The result for this method includes any row that meets the search criteria.
+```php
+
+class PostController extends Controller
+{
+    public function index(Request $request)
+    {
+        // GET /posts?title=simple&slug=simple-query-filter
+        $posts = Post::scout($request->query())->latest()->paginate();
+    }
+}
+```
+
 ### Custom Query Parameters
 You can alternatively pass an array of column names and search strings as a key-value pair to the filter method:
 ```php
