@@ -1,3 +1,7 @@
+# Deprecation Notice
+
+## This package is abandoned and no longer maintained. Consider using the [spatie/laravel-query-builder](https://github.com/spatie/laravel-query-builder) package instead.
+
 # Simple Query Filter
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/stephenjude/simple-query-filter.svg?style=flat-square)](https://packagist.org/packages/stephenjude/simple-query-filter)
